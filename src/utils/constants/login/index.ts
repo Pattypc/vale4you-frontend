@@ -7,5 +7,8 @@ export const loginError: { [key: string]: { message: string } } = {
   },
   invalidPasswordLength: {
     message: 'Senha é um campo obrigatório'
+  },
+  invalidPasswordRequirements: {
+    message: 'A senha não atende as requisitos'
   }
 }

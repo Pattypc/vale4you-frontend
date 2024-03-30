@@ -1,5 +1,6 @@
 'use client'
 
+import { TabsLobbyProvider } from '@/app/contexts/tabs-lobby'
 import { queryClient } from '@/config/client'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactNode } from 'react'
@@ -14,7 +15,7 @@ export const Providers = ({ children }: { children: ReactNode }) => {
         enableSystem
         disableTransitionOnChange
       >
-        {children}
+        <TabsLobbyProvider>{children}</TabsLobbyProvider>
       </ThemeProvider>
     </QueryClientProvider>
   )

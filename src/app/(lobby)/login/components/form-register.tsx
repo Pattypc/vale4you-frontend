@@ -9,27 +9,28 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { LoginSchemaData } from '@/utils/schemas/login-schema'
+import { RegisterSchemaData } from '@/utils/schemas/register-schema'
 import { User } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
+import { PasswordRequirements } from './password-requirements'
 
-export const FormLogin = () => {
-  const form = useFormContext<LoginSchemaData>()
+export const FormRegister = () => {
+  const form = useFormContext<RegisterSchemaData>()
 
-  const handleStartSession = (data: LoginSchemaData) => {
+  const handleRegister = (data: RegisterSchemaData) => {
     console.log('data', data)
   }
 
   return (
     <Form {...form}>
       <h1 className="text-white-700 dark:text-white-100 font-poppins font-medium text-lg">
-        Entrar em Vale4You
+        Registre-se na Vale4YOU
       </h1>
       <p className="text-white-600 dark:text-white-400 font-firasans font-normal text-base">
-        Entre e comece a criar vales para presentear seus amigos em momentos
-        especiais. Faça login e espalhe alegria!
+        Registre-se e comece a criar vales para presentear seus amigos em
+        momentos especiais.
       </p>
-      <form onSubmit={form.handleSubmit(handleStartSession)} className="mt-5">
+      <form onSubmit={form.handleSubmit(handleRegister)} className="mt-5">
         <div className="flex flex-col gap-4">
           <FormField
             control={form.control}
@@ -40,6 +41,7 @@ export const FormLogin = () => {
                   <Input
                     icon={<User size={16} />}
                     placeholder="seuemail@exemplo.com"
+                    className={`${form.formState.errors.email?.message && '!border-alert-failure focus-visible:!ring-alert-failure'}`}
                     {...field}
                   />
                 </FormControl>
@@ -57,6 +59,24 @@ export const FormLogin = () => {
                   <Input
                     type="password"
                     placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                    className={`${form.formState.errors.password?.message && '!border-alert-failure focus-visible:!ring-alert-failure'}`}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                    className={`${form.formState.errors.confirmPassword?.message && '!border-alert-failure focus-visible:!ring-alert-failure'}`}
                     {...field}
                   />
                 </FormControl>
@@ -65,8 +85,9 @@ export const FormLogin = () => {
             )}
           />
         </div>
+        <PasswordRequirements />
         <Button type="submit" variant="gradient" className="w-full mt-5">
-          Iniciar Sessão
+          Criar conta
         </Button>
       </form>
     </Form>
