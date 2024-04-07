@@ -17,7 +17,8 @@ const buttonVariants = cva(
         gradient:
           'bg-gradient-to-b from-primary-100 to-primary-700 text-primary-tone-by-tone uppercase rounded-lg font-semibold',
         ouline:
-          'dark:bg-dark-200 dark:border-dark-500 border rounded-md bg-white-200 border border-white-500'
+          'dark:bg-dark-200 dark:border-dark-500 border rounded-md bg-white-200 border border-white-500',
+        link: 'font-bold dark:font-medium dark:text-primary-100 text-dark-200'
       },
       size: {
         clear: '',

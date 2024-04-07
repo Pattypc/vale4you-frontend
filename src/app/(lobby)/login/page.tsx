@@ -12,9 +12,12 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import { FormProvider, useForm } from 'react-hook-form'
-import { ForgotPassowrd } from './components/forgot-password'
-import { FormLogin } from './components/form-login'
-import { FormRegister } from './components/form-register'
+import { FormForgotPassword } from './components/forgot-password-features'
+import { BackToLogin } from './components/forgot-password-features/back-to-login'
+import { ForgotPassowrd } from './components/login-features/forgot-password'
+import { FormLogin } from './components/login-features/form-login'
+import { ConfirmEmail } from './components/register-features/confirm-email'
+import { FormRegister } from './components/register-features/form-register'
 
 const LoginPage = () => {
   const { activeTab, setActiveTab } = useTabsLobby()
@@ -37,6 +40,9 @@ const LoginPage = () => {
   })
 
   const isLogin = activeTab === 'login'
+  const isRegister = activeTab === 'register'
+  const showButtonsNavigation =
+    activeTab !== 'forgot-password' && activeTab !== 'confirm-email'
 
   return (
     <main className="flex flex-row min-h-screen w-full">
@@ -55,22 +61,25 @@ const LoginPage = () => {
           <Vale4YouLogo />
           <ThemeToggle />
         </header>
-        <nav className="flex mt-14 flex-row justify-center">
-          <Button
-            onClick={() => setActiveTab('login')}
-            className="w-full flex-1 rounded-l-lg"
-            variant={`${isLogin ? 'default' : 'black'}`}
-          >
-            Entrar
-          </Button>
-          <Button
-            onClick={() => setActiveTab('register')}
-            variant={`${!isLogin ? 'default' : 'black'}`}
-            className="w-full flex-1 rounded-r-lg"
-          >
-            Registrar
-          </Button>
-        </nav>
+        {showButtonsNavigation && (
+          <nav className="flex mt-14 flex-row justify-center">
+            <Button
+              onClick={() => setActiveTab('login')}
+              className="w-full flex-1 rounded-l-lg"
+              variant={`${isLogin ? 'default' : 'black'}`}
+            >
+              Entrar
+            </Button>
+            <Button
+              onClick={() => setActiveTab('register')}
+              variant={`${isRegister ? 'default' : 'black'}`}
+              className="w-full flex-1 rounded-r-lg"
+            >
+              Registrar
+            </Button>
+          </nav>
+        )}
+
         <section className="mt-10 flex flex-col gap-2">
           <FormProvider {...formLogin}>
             {activeTab === 'login' && (
@@ -83,6 +92,18 @@ const LoginPage = () => {
           </FormProvider>
           <FormProvider {...formRegister}>
             {activeTab === 'register' && <FormRegister />}
+            {activeTab === 'forgot-password' && (
+              <>
+                <FormForgotPassword />
+                <BackToLogin />
+              </>
+            )}
+            {activeTab === 'confirm-email' && (
+              <>
+                <ConfirmEmail />
+                <BackToLogin />
+              </>
+            )}
           </FormProvider>
         </section>
       </section>
