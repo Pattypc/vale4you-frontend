@@ -6,7 +6,12 @@ import {
   useState
 } from 'react'
 
-type ActiveTabProps = 'login' | 'register' | 'forgot-password' | 'confirm-email'
+type ActiveTabProps =
+  | 'login'
+  | 'register'
+  | 'forgot-access-email'
+  | 'forgot-access-new-password'
+  | 'confirm-email'
 
 type TabsLobbyContextData = {
   activeTab: ActiveTabProps

@@ -12,6 +12,7 @@ export const BackToLogin = () => {
         size="clear"
         variant="link"
         className="ml-1"
+        type="button"
       >
         Entrar
       </Button>
@@ -20,6 +21,7 @@ export const BackToLogin = () => {
         onClick={() => setActiveTab('register')}
         size="clear"
         variant="link"
+        type="button"
       >
         Registrar
       </Button>

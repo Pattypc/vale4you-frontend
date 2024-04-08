@@ -9,7 +9,7 @@ export const ForgotPassowrd = () => {
       <h3 className="font-firasans font-normal text-sm dark:text-white-400 text-white-700">
         Esqueceu sua senha?{' '}
         <Button
-          onClick={() => setActiveTab('forgot-password')}
+          onClick={() => setActiveTab('forgot-access-email')}
           size="clear"
           variant="link"
         >
