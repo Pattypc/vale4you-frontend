@@ -17,7 +17,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { BackToLogin } from './back-to-login'
+import { BackToLogin } from '../back-to-login'
 
 export const FormForgotAccessEmail = () => {
   const { setActiveTab } = useTabsLobby()

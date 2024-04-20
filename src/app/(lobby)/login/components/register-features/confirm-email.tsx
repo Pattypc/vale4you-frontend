@@ -17,8 +17,8 @@ import {
   ConfirmEmailCodeSchema
 } from '@/utils/schemas/confirm-email-code'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Image from 'next/image'
 import { useForm } from 'react-hook-form'
+import { BackToLogin } from '../back-to-login'
 
 export const ConfirmEmail = () => {
   const form = useForm<ConfirmEmailCodeData>({
@@ -34,16 +34,20 @@ export const ConfirmEmail = () => {
 
   return (
     <div className="grid place-content-center m">
-      <header className=" gap-4 flex flex-col items-center justify-center">
-        <Image
+      <header className="gap-1 flex flex-col items-center justify-center">
+        {/* <Image
           src="/icon-confirm-email.png"
           width={70}
           height={70}
           alt="Imagem ilustrativa para confirmação do e-mail"
-        />
+        /> */}
         <h1 className="font-poppins text-xl font-medium tracking-wide dark:text-white-100 text-dark-200">
-          Insira abaixo o código enviado por e-mail
+          Confirmação de registro
         </h1>
+        <p className="text-center dark:text-dark-700 mb-4 text-dark-300 font-poppins text-base">
+          Estamos quase lá. Insira abaixo o código que <br /> te enviamos por
+          e-mail.
+        </p>
       </header>
       <main>
         <Form {...form}>
@@ -54,7 +58,7 @@ export const ConfirmEmail = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <InputOTP {...field} maxLength={6}>
+                    <InputOTP {...field} className="bg-red-500 " maxLength={6}>
                       <InputOTPGroup>
                         <InputOTPSlot index={0} />
                         <InputOTPSlot index={1} />
@@ -72,11 +76,12 @@ export const ConfirmEmail = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" variant="gradient" className="w-full mt-5">
+            <Button type="submit" variant="gradient" className="w-full mt-6">
               Confirmar
             </Button>
           </form>
         </Form>
+        <BackToLogin className="mt-10" />
       </main>
     </div>
   )

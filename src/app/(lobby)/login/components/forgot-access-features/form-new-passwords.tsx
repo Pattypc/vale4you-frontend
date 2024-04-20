@@ -13,8 +13,8 @@ import {
 } from '@/utils/schemas/forgot-password'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { BackToLogin } from '../back-to-login'
 import { PasswordRequirements } from '../register-features/password-requirements'
-import { BackToLogin } from './back-to-login'
 
 export const FormForgotAccessPassword = () => {
   const form = useForm<ForgotAccessPasswordData>({
