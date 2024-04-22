@@ -27,10 +27,15 @@ export const AuthContext = createContext({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userData, setUserData] = useState<UserDataProps | null>(null)
-  const isAuthenticated = !!userData
+  const isAuthenticated = !!userData?.fullName
 
   const login = (data: LoginProps) => {
-    return data
+    setUserData({
+      id: '1',
+      email: 'mateuspaulo1337@gmail.com',
+      fullName: 'Mateus Paulo da Silva',
+      permissions: ['read-dashboard']
+    })
   }
 
   const logout = () => {

@@ -1,6 +1,5 @@
 'use client'
 
-import { useAuth } from '@/app/hooks/auth'
 import { useTabsLobby } from '@/app/hooks/useTabsLobby'
 import { Vale4YouLogo } from '@/components/logo'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -14,13 +13,10 @@ import { FormRegister } from './components/register-features/form-register'
 
 const LoginPage = () => {
   const { activeTab, setActiveTab } = useTabsLobby()
-  const { userData } = useAuth()
 
   const isLogin = activeTab === 'login'
   const isRegister = activeTab === 'register'
   const showButtonsNavigation = isLogin || isRegister
-
-  console.log('userData', userData)
 
   return (
     <main className="flex flex-row min-h-screen w-full">
