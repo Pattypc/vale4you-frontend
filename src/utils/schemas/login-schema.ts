@@ -9,22 +9,14 @@ export const LoginSchema = z
       .min(1, { message: loginError.invalidEmailLength.message }),
     password: z
       .string()
-      .min(1, { message: loginError.invalidPasswordLength.message })
+      .min(8, { message: loginError.invalidPasswordLength.message })
   })
   .superRefine(({ password }, ctx) => {
-    if (password.length < 8) {
-      ctx.addIssue({
-        code: 'custom',
-        path: ['password'],
-        message: 'A senha precisa conter pelo menos 8 dígitos'
-      })
-    }
-
     if (!/[A-Z]/.test(password)) {
       ctx.addIssue({
         code: 'custom',
         path: ['password'],
-        message: 'A senha precisa conter pelo menos 1 letra maíuscula'
+        message: loginError.invalidUppercaseLetterPassword.message
       })
     }
 
@@ -32,7 +24,7 @@ export const LoginSchema = z
       ctx.addIssue({
         code: 'custom',
         path: ['password'],
-        message: 'A senha precisa conter pelo menos 1 letra minúscula'
+        message: loginError.invalidLowercaseLetterPassword.message
       })
     }
 
@@ -40,7 +32,7 @@ export const LoginSchema = z
       ctx.addIssue({
         code: 'custom',
         path: ['password'],
-        message: 'A senha precisa conter pelo menos um caractere especial'
+        message: loginError.invalidSpecialCharacterPassword.message
       })
     }
 
@@ -48,7 +40,7 @@ export const LoginSchema = z
       ctx.addIssue({
         code: 'custom',
         path: ['password'],
-        message: 'A senha precisa conter pelo menos um número'
+        message: loginError.invalidNumberPassword.message
       })
     }
   })

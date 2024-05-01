@@ -1,5 +1,7 @@
 'use client'
 
+import { CONSTANTS } from '@/app/constants'
+import { LoaderSpinner } from '@/components/loader-spinner'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -12,10 +14,12 @@ import { Input } from '@/components/ui/input'
 import { LoginSchema, LoginSchemaData } from '@/utils/schemas/login-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { User } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ForgotPassowrd } from './forgot-password'
 
 export const FormLogin = () => {
+  const [isLoadingButton, setIsLoadingButton] = useState(false)
   const form = useForm<LoginSchemaData>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -26,6 +30,7 @@ export const FormLogin = () => {
 
   const handleStartSession = (data: LoginSchemaData) => {
     console.log('data', data)
+    setIsLoadingButton(true)
   }
 
   return (
@@ -38,7 +43,11 @@ export const FormLogin = () => {
           Entre e comece a criar vales para presentear seus amigos em momentos
           especiais. Faça login e espalhe alegria!
         </p>
-        <form onSubmit={form.handleSubmit(handleStartSession)} className="mt-5">
+        <form
+          aria-label="form-to-login"
+          onSubmit={form.handleSubmit(handleStartSession)}
+          className="mt-5"
+        >
           <div className="flex flex-col gap-4">
             <FormField
               control={form.control}
@@ -49,6 +58,7 @@ export const FormLogin = () => {
                     <Input
                       icon={<User size={16} />}
                       placeholder="seuemail@exemplo.com"
+                      aria-label="Email"
                       {...field}
                     />
                   </FormControl>
@@ -60,12 +70,14 @@ export const FormLogin = () => {
             <FormField
               control={form.control}
               name="password"
+              aria-label="Password"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <Input
                       type="password"
                       placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                      aria-label="Password"
                       {...field}
                     />
                   </FormControl>
@@ -74,8 +86,17 @@ export const FormLogin = () => {
               )}
             />
           </div>
-          <Button type="submit" variant="gradient" className="w-full mt-5">
-            Iniciar Sessão
+          <Button
+            disabled={isLoadingButton}
+            type="submit"
+            variant="gradient"
+            className="w-full mt-5"
+            aria-label="button-submit-login"
+          >
+            {isLoadingButton && <LoaderSpinner />}
+            {isLoadingButton
+              ? CONSTANTS.button_loading_start_session
+              : CONSTANTS.button_start_session}
           </Button>
         </form>
       </Form>

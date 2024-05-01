@@ -8,7 +8,16 @@ export const loginError: { [key: string]: { message: string } } = {
   invalidPasswordLength: {
     message: 'Senha é um campo obrigatório'
   },
-  invalidPasswordRequirements: {
-    message: 'A senha não atende as requisitos'
+  invalidUppercaseLetterPassword: {
+    message: 'A senha precisa conter pelo menos 1 letra maíuscula'
+  },
+  invalidLowercaseLetterPassword: {
+    message: 'A senha precisa conter pelo menos 1 letra minúscula'
+  },
+  invalidSpecialCharacterPassword: {
+    message: 'A senha precisa conter pelo menos um caractere especial'
+  },
+  invalidNumberPassword: {
+    message: 'A senha precisa conter pelo menos um número'
   }
 }
