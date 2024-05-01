@@ -1,8 +1,23 @@
-import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
+import { Skeleton } from './skeleton'
+
+export const defaultClassname =
+  'dark:bg-gradient-to-b dark:from-primary-100 dark:to-primary-700 dark:text-primary-tone-by-tone bg-dark-200 text-white-100 bg-dark-300 border border-dark-300 dark:border-primary-100'
+
+export const blackClassname =
+  'dark:bg-dark-200 border dark:border-primary-100 border-dark-300 bg-white-100 dark:hover:text-primary-100'
+
+export const gradientClassname =
+  'bg-gradient-to-b from-primary-100 to-primary-700 text-primary-tone-by-tone uppercase rounded-lg font-semibold'
+
+export const outlineClassname =
+  'dark:bg-dark-200 dark:border-dark-500 border rounded-md bg-white-200 border border-white-500'
+
+export const linkClassname =
+  'font-bold dark:font-medium dark:text-primary-100 text-dark-200'
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap text-sm font-poppins  transition-colors focus-visible:outline-none focus-visible:ring-1 font-normal dark:focus-visible:ring-primary-600 focus-visible:ring-white-500 disabled:pointer-events-none disabled:opacity-50',
@@ -39,13 +54,29 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  isLoading?: boolean
+  classNameSkeleton?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
+  (
+    {
+      className,
+      variant,
+      size,
+      isLoading = false,
+      classNameSkeleton,
+      ...props
+    },
+    ref
+  ) => {
+    if (isLoading)
+      return (
+        <Skeleton className={cn('h-10 w-full rounded-lg', classNameSkeleton)} />
+      )
+
     return (
-      <Comp
+      <button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

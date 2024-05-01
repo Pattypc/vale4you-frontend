@@ -10,18 +10,29 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { RegisterSchemaData } from '@/utils/schemas/register-schema'
+import {
+  RegisterSchema,
+  RegisterSchemaData
+} from '@/utils/schemas/register-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { User } from 'lucide-react'
-import { useFormContext } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { PasswordRequirements } from './password-requirements'
 
 export const FormRegister = () => {
-  const { setActiveTab } = useTabsLobby()
-  const form = useFormContext<RegisterSchemaData>()
+  const { onChangeActiveTab } = useTabsLobby()
+  const form = useForm<RegisterSchemaData>({
+    resolver: zodResolver(RegisterSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  })
 
   const handleRegister = (data: RegisterSchemaData) => {
     console.log('data', data)
-    setActiveTab('confirm-email')
+    onChangeActiveTab('confirm-email')
   }
 
   return (
@@ -34,7 +45,7 @@ export const FormRegister = () => {
         momentos especiais.
       </p>
       <form onSubmit={form.handleSubmit(handleRegister)} className="mt-5">
-        <div className="flex flex-col gap-4">
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="email"
