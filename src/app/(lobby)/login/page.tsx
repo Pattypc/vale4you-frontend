@@ -12,7 +12,7 @@ import { ConfirmEmail } from './components/register-features/confirm-email'
 import { FormRegister } from './components/register-features/form-register'
 
 const LoginPage = () => {
-  const { activeTab, setActiveTab } = useTabsLobby()
+  const { activeTab, onChangeActiveTab } = useTabsLobby()
 
   const isLogin = activeTab === 'login'
   const isRegister = activeTab === 'register'
@@ -38,14 +38,14 @@ const LoginPage = () => {
         {showButtonsNavigation && (
           <nav className="flex mt-14 flex-row justify-center">
             <Button
-              onClick={() => setActiveTab('login')}
+              onClick={() => onChangeActiveTab('login')}
               className="w-full flex-1 rounded-l-lg"
               variant={`${isLogin ? 'default' : 'black'}`}
             >
               Entrar
             </Button>
             <Button
-              onClick={() => setActiveTab('register')}
+              onClick={() => onChangeActiveTab('register')}
               variant={`${isRegister ? 'default' : 'black'}`}
               className="w-full flex-1 rounded-r-lg"
             >

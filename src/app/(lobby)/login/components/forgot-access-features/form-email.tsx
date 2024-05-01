@@ -20,7 +20,7 @@ import { useForm } from 'react-hook-form'
 import { BackToLogin } from '../back-to-login'
 
 export const FormForgotAccessEmail = () => {
-  const { setActiveTab } = useTabsLobby()
+  const { onChangeActiveTab } = useTabsLobby()
 
   const form = useForm<ForgotAccessEmailData>({
     resolver: zodResolver(ForgotAccessEmailSchema),
@@ -31,7 +31,7 @@ export const FormForgotAccessEmail = () => {
 
   const handleRequestPassword = (data: ForgotAccessEmailData) => {
     console.log('data', data)
-    setActiveTab('forgot-access-new-password')
+    onChangeActiveTab('forgot-access-new-password')
   }
 
   const isDisabledSubmitButton = form.formState.isValid

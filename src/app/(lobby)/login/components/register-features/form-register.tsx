@@ -20,7 +20,7 @@ import { useForm } from 'react-hook-form'
 import { PasswordRequirements } from './password-requirements'
 
 export const FormRegister = () => {
-  const { setActiveTab } = useTabsLobby()
+  const { onChangeActiveTab } = useTabsLobby()
   const form = useForm<RegisterSchemaData>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -32,7 +32,7 @@ export const FormRegister = () => {
 
   const handleRegister = (data: RegisterSchemaData) => {
     console.log('data', data)
-    setActiveTab('confirm-email')
+    onChangeActiveTab('confirm-email')
   }
 
   return (

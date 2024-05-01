@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const isAuthenticated = !!userData?.fullName
 
   const login = (data: LoginProps) => {
+    console.log('data', data)
     setUserData({
       id: '1',
       email: 'mateuspaulo1337@gmail.com',

@@ -7,7 +7,7 @@ interface BackToLoginProps {
 }
 
 export const BackToLogin = ({ className }: BackToLoginProps) => {
-  const { setActiveTab } = useTabsLobby()
+  const { onChangeActiveTab } = useTabsLobby()
 
   return (
     <h3
@@ -18,7 +18,7 @@ export const BackToLogin = ({ className }: BackToLoginProps) => {
     >
       Deseja voltar? Escolha uma das opções ao lado{' '}
       <Button
-        onClick={() => setActiveTab('login')}
+        onClick={() => onChangeActiveTab('login')}
         size="clear"
         variant="link"
         className="ml-1"
@@ -28,7 +28,7 @@ export const BackToLogin = ({ className }: BackToLoginProps) => {
       </Button>
       <span>ou</span>
       <Button
-        onClick={() => setActiveTab('register')}
+        onClick={() => onChangeActiveTab('register')}
         size="clear"
         variant="link"
         type="button"
